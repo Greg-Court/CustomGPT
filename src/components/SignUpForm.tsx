@@ -2,6 +2,8 @@ import { Button } from '@mui/material';
 import { auth, googleProvider } from '../config/firebase';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
+import { db } from '../config/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 interface SignUpFormProps {
   setCreateAccount: (value: boolean) => void;
@@ -20,7 +22,19 @@ export const SignUpForm = ({
 
   const createAccount = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(userCredential)
+      const user = userCredential.user;
+      await addDoc(collection(db, 'users'), {
+        uid: user.uid,
+        firstName,
+        lastName,
+        email,
+      });
       onSuccess();
     } catch (err) {
       console.error(err);

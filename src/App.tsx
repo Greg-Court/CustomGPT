@@ -1,22 +1,29 @@
-import { Button } from '@mui/material';
-import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import { SignInPage } from './conatiners/SignInPage';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
+import AuthPage from './conatiners/AuthPage';
+import MainPage from './conatiners/MainPage';
+import { UserProvider } from './contexts/UserContext';
+import Landing from './components/Landing';
 
 function App() {
-
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<SignInPage />}>
-        <Route path='/listings' element={<Listings />} />
-      </Route>
+      <>
+        <Route path='/' element={<AuthPage />} />
+        <Route path='/app' element={<MainPage />}>
+        </Route>
+      </>
     )
   );
 
   return (
-    <div className='bg-green-500'>
-      <h1>Hello World</h1>
-      <Button variant='contained' className='bg-red-500'>Testing MUI & Tailwind Injection</Button>
-    </div>
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   );
 }
 

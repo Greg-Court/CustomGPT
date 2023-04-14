@@ -1,13 +1,17 @@
-import { ChatBubbleLeftIcon } from '@heroicons/react/24/solid';
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 
-const selectChat = () => {
+const ChatRow = ({chat}) => {
+  const navigate = useNavigate();
 
-}
+  const selectChat = () => {
+    console.log(JSON.stringify(chat))
+    navigate(`/app/chats/${chat.id}`);
+  }
 
-const ChatRow = () => {
   return (
-    <div className='border-gray-700 border chatRow' onClick={selectChat}>
-      <ChatBubbleLeftIcon className='h-4 w-4' />
+    <div className='chatRow justify-start my-2 pl-1' chat={chat} onClick={selectChat}>
+      <ChatBubbleLeftIcon className='h-5 w-5' />
       <p>Chat</p>
     </div>
   );

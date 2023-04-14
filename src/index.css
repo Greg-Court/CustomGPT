@@ -24,3 +24,14 @@
 :root {
   font-family: 'Oxanium', cursive;
 }
+
+/* Chrome, Safari, and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.hide-scrollbar {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}

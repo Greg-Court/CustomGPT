@@ -1,4 +1,5 @@
 import React from 'react';
+import { useUser } from '../contexts/UserContext';
 
 interface MessageProps {
   message: string;
@@ -11,13 +12,16 @@ const Message: React.FC<MessageProps> = ({
   sender,
   isUserMessage,
 }) => {
+  const {user} = useUser();
+
   return (
     <div
-      className={`max-w-6xl my-1 p-3 rounded-lg text-white ${
-        isUserMessage ? 'bg-blue-950 ml-auto' : 'bg-gray-800 mr-auto'
+      className={`flex items-center p-3 text-white gap-5 ${
+        isUserMessage ? 'bg-blue-950' : 'bg-gray-800'
       }`}
     >
-      <p>{message}</p>
+      <img src={user?.photoURL} alt="userprofilepic" className='rounded-full h-12 w-12' />
+      <p className='flex items-center'>{message}</p>
     </div>
   );
 };

@@ -3,13 +3,16 @@ import { Button, TextareaAutosize } from '@mui/material';
 import { AiOutlineSend } from 'react-icons/ai';
 import { sendMessage } from '../api/firebaseApi';
 import { useUser } from '../contexts/UserContext';
+import { Message } from '../types/types';
+import { generateAiResponse } from '../api/openaiApi';
 
 interface ChatInputProps {
   chatId: string;
-  // setMessages: 
+  setMessages: (messages: (prevMessages: Message[]) => Message[]) => void;
+  messages: Message[];
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ chatId, setMessages }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ chatId, setMessages, messages }) => {
   const { user } = useUser();
   const [inputValue, setInputValue] = useState('');
 
@@ -25,6 +28,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ chatId, setMessages }) => {
       const newMessage = await sendMessage(user.uid, chatId, inputValue);
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInputValue('');
+      generateAiResponse(messages, "gpt-3.5-turbo")
     }
   };
 
@@ -35,6 +39,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ chatId, setMessages }) => {
         onChange={handleInputChange}
         className='min-h-[3rem] max-h-[20rem] flex-grow bg-gray-900 border-none focus:ring-0 text-white resize-none custom-scrollbar'
         style={{ overflow: 'auto' }}
+        onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
       />
       <Button
         type='submit'

@@ -7,9 +7,10 @@ import { Chat } from '../types/types';
 interface ChatProps {
   chat: Chat;
   fetchChatList: () => Promise<void>;
+  active: boolean;
 }
 
-const ChatRow: React.FC<ChatProps> = ({ chat, fetchChatList }) => {
+const ChatRow: React.FC<ChatProps> = ({ chat, fetchChatList, active }) => {
   const navigate = useNavigate();
   const {user} = useUser();
 
@@ -26,7 +27,7 @@ const ChatRow: React.FC<ChatProps> = ({ chat, fetchChatList }) => {
 
   return (
     <div
-      className='chatRow justify-between my-2 px-2'
+      className={`chatRow justify-between my-2 px-2 ${active && '!bg-gray-700'}`}
       chat={chat}
       onClick={selectChat}
     >

@@ -2,8 +2,14 @@ import { ChatBubbleLeftIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { deleteChat } from '../api/firebaseApi';
 import { useUser } from '../contexts/UserContext';
+import { Chat } from '../types/types';
 
-const ChatRow = ({ chat, fetchChatList }) => {
+interface ChatProps {
+  chat: Chat;
+  fetchChatList: () => Promise<void>;
+}
+
+const ChatRow: React.FC<ChatProps> = ({ chat, fetchChatList }) => {
   const navigate = useNavigate();
   const {user} = useUser();
 

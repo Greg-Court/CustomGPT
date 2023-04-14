@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { SignInForm } from '../components/SignInForm';
 import { SignUpForm } from '../components/SignUpForm';
 import { useNavigate } from 'react-router-dom';
-import { GPTVariations } from '../lib/GPTVariations';
+import { GPTVariations } from '../lib/arrays';
+import { useUser } from '../contexts/UserContext';
 
 const AuthPage = () => {
   const [createAccount, setCreateAccount] = useState<boolean>(false);

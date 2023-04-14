@@ -6,13 +6,17 @@ interface SideBarOptionProps {
   onClick: () => void;
 }
 
-const SideBarOption: FunctionComponent<SideBarOptionProps> = ({ IconComponent, label, onClick }) => {
+const SideBarOption: FunctionComponent<SideBarOptionProps> = ({
+  IconComponent,
+  label,
+  onClick,
+}) => {
   return (
-    <div className="flex items-center space-x-2 cursor-pointer px-1 py-2 hover:bg-gray-600 rounded-lg min-w-full" onClick={onClick}>
-      <IconComponent className='w-6 h-6'/>
+    <div className='sidebarOption' onClick={onClick}>
+      <IconComponent className='w-6 h-6' />
       <p>{label}</p>
     </div>
   );
 };
 
-export default SideBarOption
+export default SideBarOption;

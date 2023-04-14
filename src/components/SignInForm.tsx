@@ -33,14 +33,6 @@ export const SignInForm = ({
     }
   };
 
-  // const logout = async () => {
-  //   try {
-  //     await signOut(auth);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   return (
     <div className='flex flex-col gap-2 mt-2 min-w-[20rem]'>
       <input
@@ -70,13 +62,6 @@ export const SignInForm = ({
         />
         Sign in with Google
       </Button>
-      {/* <Button
-        onClick={logout}
-        variant='contained'
-        className='bg-blue-600 hover:bg-blue-500 text-xl'
-      >
-        Logout
-      </Button> */}
       <Button
         variant='contained'
         className='authButton'

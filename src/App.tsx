@@ -7,6 +7,7 @@ import {
 import AuthPage from './conatiners/AuthPage';
 import MainPage from './conatiners/MainPage';
 import { UserProvider } from './contexts/UserContext';
+import ChatPage from './components/ChatPage';
 import Landing from './components/Landing';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
       <>
         <Route path='/' element={<AuthPage />} />
         <Route path='/app' element={<MainPage />}>
+          <Route path='/app' element={<Landing />} />
+          <Route path='chats/:chatId' element={<ChatPage />} />
         </Route>
       </>
     )

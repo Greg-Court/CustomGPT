@@ -1,11 +1,11 @@
 import SideBar from '../components/SideBar';
-import Landing from '../components/Landing';
+import { Outlet } from 'react-router-dom';
 
 const MainPage = () => {
   return (
-    <div className='flex'>
+    <div className='flex bg-gray-950'>
       <SideBar />
-      <Landing />
+      <Outlet />
     </div>
   );
 };

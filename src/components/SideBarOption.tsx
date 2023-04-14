@@ -1,7 +1,11 @@
 import { FC, FunctionComponent } from 'react';
 
+interface IconComponentProps {
+  className: string;
+}
+
 interface SideBarOptionProps {
-  IconComponent: FC;
+  IconComponent: FC<IconComponentProps>;
   label: string;
   onClick: () => void;
 }

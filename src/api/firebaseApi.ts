@@ -141,3 +141,8 @@ export const getPrompt = async (userUid: string, promptUid: string) => {
   const promptSnapshot = await getDoc(promptRef);
   return promptSnapshot;
 };
+
+export const deletePrompt = async (userUid, promptUid) => {
+  const promptDocRef = doc(db, 'users', userUid, 'prompts', promptUid);
+  await deleteDoc(promptDocRef);
+};

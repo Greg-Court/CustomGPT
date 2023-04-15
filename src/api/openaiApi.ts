@@ -9,6 +9,7 @@ const openai = new OpenAIApi(configuration);
 
 export const getModelOptions = async () => {
   const response = await openai.listModels();
+  console.log(JSON.stringify(response.data.data));
   const modelOptions = response.data.data.map((model) => ({
     value: model.id,
     label: model.id,

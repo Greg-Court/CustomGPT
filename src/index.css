@@ -10,12 +10,34 @@
     @apply p-4 bg-gray-700/50 rounded-lg max-w-[300px];
   }
   .chatRow {
-    @apply rounded-lg text-sm max-h-12 px-2 py-3 flex items-center justify-start space-x-2 hover:bg-gray-700/70 cursor-pointer text-gray-200 transition-all ease-out;
+    @apply rounded-lg max-h-12 px-2 py-3 flex items-center justify-start space-x-2 hover:bg-gray-700/70 cursor-pointer text-gray-200 transition-all ease-out;
   }
   .sidebarOption {
     @apply text-sm flex items-center space-x-2 cursor-pointer px-2 py-1.5 mt-0.5 hover:bg-gray-700/70 rounded-lg min-w-full transition-all ease-out text-gray-300;
   }
+  .autocomplete-wrapper .MuiOutlinedInput-notchedOutline {
+    @apply border-gray-700 rounded-lg;
+  }
+
+  .autocomplete-wrapper .Mui-focused .MuiOutlinedInput-notchedOutline,
+  .autocomplete-wrapper .MuiOutlinedInput-notchedOutline:hover {
+    @apply border-gray-700 rounded-lg;
+  }
+
+  .autocomplete-input input {
+    @apply !bg-transparent text-gray-200 px-0;
+  }
+
+  .autocomplete-input input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .autocomplete-label {
+    @apply text-gray-200;
+  }
 }
+
 
 .oxanium {
   font-family: 'Oxanium', cursive;

@@ -4,15 +4,17 @@ import { useParams } from 'react-router-dom';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import Message from './Message';
-import { getMessages } from '../api/firebaseApi';
+import { getChat, getMessages } from '../api/firebaseApi';
 import { useRef } from 'react';
 import { generateAiResponse } from '../api/openaiApi';
+import { Chat } from '../types/types';
 
 const ChatArea = () => {
   const { user } = useUser();
   const { chatId } = useParams();
   const [messages, setMessages] = useState<QueryDocumentSnapshot[]>([]);
   const bottomRef = useRef<HTMLDivElement | null>(null);
+  const [chat, setChat] = useState<Chat>();
 
   useEffect(() => {
     if (bottomRef.current) {
@@ -23,12 +25,23 @@ const ChatArea = () => {
   const fetchMessages = async () => {
     if (chatId && user) {
       const messagesData = await getMessages(user.uid, chatId);
-      setMessages(messagesData.docs);
+      const filteredMessages = messagesData.docs.filter((message) => {
+        const role = message.get('role');
+        return role === 'user' || role === 'assistant';
+      });
+      setMessages(filteredMessages);
     }
   };
 
   useEffect(() => {
-    fetchMessages();
+    if (chatId && user) {
+      const setChatEnv = async () => {
+        const currentChat = (await getChat(user?.uid!, chatId));
+        setChat(currentChat);
+        fetchMessages();
+      };
+      setChatEnv();
+    }
   }, [chatId, user]);
 
   return (
@@ -37,15 +50,15 @@ const ChatArea = () => {
         {messages.map((message, index) => (
           <Message
             key={index}
-            message={message.get('message')}
+            content={message.get('content')}
             sender={message.get('sender')}
-            isUserMessage={message.get('uid') === user.uid}
+            isUserMessage={message.get('role') === 'user'}
           />
         ))}
         <div ref={bottomRef}></div>
       </div>
       <ChatInput
-        chatId={chatId}
+        chat={chat}
         setMessages={setMessages}
         messages={messages}
         generateAiResponse={generateAiResponse}

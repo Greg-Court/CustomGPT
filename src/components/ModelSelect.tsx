@@ -1,24 +1,18 @@
-import { FormControl, InputLabel, MenuItem } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
-const ModelSelect = ({modelOptions}) => {
+const ModelSelect = ({ modelOptions, setSelectedModel }) => {
   return (
-    <FormControl className='my-2'>
-      <InputLabel id='model-select-label' className='text-gray-200'>
-        Select Model
-      </InputLabel>
-      <Select
-        className='text-gray-200'
-        label='Yeboi'
-        labelId='model-select-label'
-      >
-        {modelOptions.map((option, index) => (
-          <MenuItem key={index} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Autocomplete
+      className='mb-2 '
+      options={modelOptions}
+      onChange={(event, value) => {
+        setSelectedModel(value?.value);
+      }}
+      renderInput={(params) => (
+        <TextField {...params} label='Select Model' sx={{ border: 'none' }} />
+      )}
+    />
   );
 };
 

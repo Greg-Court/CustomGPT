@@ -16,12 +16,10 @@ export const getModelOptions = async () => {
   return modelOptions;
 };
 
-export const generateAiResponse = async (
-  messages: Message[],
-  model: string
-) => {
-  // const res = await openai.createChatCompletion({
-  //   messages: messages,
-  //   model: model,
-  // });
+export const generateAiResponse = async (model, messages) => {
+  return await openai.createChatCompletion({
+    model: model,
+    messages: messages,
+    temperature: 1,
+  })
 };

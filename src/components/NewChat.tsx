@@ -1,18 +1,6 @@
 import { PlusIcon } from '@heroicons/react/24/solid';
-import { useUser } from '../contexts/UserContext';
-import { useNavigate } from 'react-router-dom';
-import { createNewChat, getChat } from '../api/firebaseApi';
 
-const NewChat = ({ setChatList }) => {
-  const { user } = useUser();
-  const navigate = useNavigate();
-
-  const handleCreateNewChat = async () => {
-    const chatId = await createNewChat(user?.uid!);
-    const newChat = await getChat(user?.uid!, chatId);
-    setChatList((prevChats) => [...prevChats, newChat]);
-    navigate(`/app/chats/${chatId}`);
-  };
+const NewChat = ({ handleCreateNewChat }) => {
 
   return (
     <div

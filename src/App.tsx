@@ -9,6 +9,7 @@ import MainPage from './conatiners/MainPage';
 import { UserProvider } from './contexts/UserContext';
 import ChatArea from './components/ChatArea';
 import Landing from './components/Landing';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const router = createBrowserRouter(
@@ -26,6 +27,7 @@ function App() {
   return (
     <UserProvider>
       <RouterProvider router={router} />
+      <Toaster containerClassName="toast-container"/>
     </UserProvider>
   );
 }

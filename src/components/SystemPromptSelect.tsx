@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
-import PromptModal from './PromptModal';
+import PromptModal from './PromptsManager';
 
 const SystemPromptSelect = ({ promptOptions, setSelectedPrompt, userUid }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -15,15 +15,17 @@ const SystemPromptSelect = ({ promptOptions, setSelectedPrompt, userUid }) => {
 
   const updatedPromptOptions = [
     ...promptOptions,
-    { title: 'Edit Prompts', value: 'edit-prompts' },
+    { label: 'Edit Prompts...', value: 'edit-prompts' },
   ];
+
+  console.log(updatedPromptOptions)
 
   return (
     <>
       <Autocomplete
         className='mb-2 autocomplete-wrapper'
         options={updatedPromptOptions}
-        getOptionLabel={(option) => option.title} // Add this line
+        getOptionLabel={(option) => option.label}
         onChange={(event, value) => {
           if (value?.value === 'edit-prompts') {
             handleModalOpen();

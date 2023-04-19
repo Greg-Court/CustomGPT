@@ -88,6 +88,7 @@ const SideBar = () => {
         <SystemPromptSelect
           promptOptions={promptOptions}
           setSelectedPrompt={setSelectedPrompt}
+          userUid={user?.uid!}
         />
         <NewChat
           setChatList={setChatList}

@@ -10,7 +10,7 @@ const openai = new OpenAIApi(configuration);
 export const getModelOptions = async () => {
   const response = await openai.listModels();
   console.log(JSON.stringify(response.data.data));
-  const modelOptions = response.data.data.map((model) => ({
+  const modelOptions = response.data.data.filter((model) => model.id.includes('gpt')).map((model) => ({
     value: model.id,
     label: model.id,
   }));
